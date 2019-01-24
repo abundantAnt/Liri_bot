@@ -4,8 +4,7 @@ const Spotify = require("node-spotify-api");
 const axios = require("axios");
 const moment = require("moment");
 const fs = require("fs");
-
-// let spotify = new Spotify(keys.spotify);
+const spotify = new Spotify(keys.spotify);
 
 App(process.argv[2], process.argv[3]);
 
@@ -31,17 +30,43 @@ function App(command, params) {
   }
 };
 
+
 function getConcert(params) {
 
-  let queryURL = "https://rest.bandsintown.com/artists/" + params + "/events?app_id=codingbootcamp";
+  let queryURL = "https://rest.bandsintown.com/artists/" + params + "/events?app_id=codingbootcamp"
 
   axios.get(queryURL)
     .then(function (response) {
-      console.log(response.data);
+      data = response.data;
+      for (let i = 0; i < data.length; i++) {
+
+        console.log("Name: ",data[i].venue.name);
+        console.log("City: ",data[i].venue.city);
+        console.log("Country: ",data[i].venue.country);
+        console.log("Date: ",moment(data[i].datetime, "YYYY-MM-DD").format("MM/DD/YYYY"));
+        console.log("====================================")
+      }
+
     })
     .catch(function (err) {
       console.log(err);
     })
+};
+
+function getSpotify(params) {
+  if (params === undefined || params === " ") {
+    params = "Welcome to The Jungle";
+  } 
+
+  spotify
+    .search({ type: 'track', query: params })
+    .then(function(response) {
+      console.log(response.tracks.items);
+    })
+    .catch(function(err) {
+      console.log(err);
+    });
+
 };
 
 function getMovie(params) {
