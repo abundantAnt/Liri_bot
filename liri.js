@@ -37,13 +37,13 @@ function getConcert(params) {
 
   axios.get(queryURL)
     .then(function (response) {
-      data = response.data;
-      for (let i = 0; i < data.length; i++) {
+      let rd = response.data;
+      for (let i = 0; i < rd.length; i++) {
         console.log("\n==============================");
-        console.log("Name: ", data[i].venue.name);
-        console.log("City: ", data[i].venue.city);
-        console.log("Country: ", data[i].venue.country);
-        console.log("Date: ", moment(data[i].datetime, "YYYY-MM-DD").format("MM/DD/YYYY"));
+        console.log("Name: ", rd[i].venue.name);
+        console.log("City: ", rd[i].venue.city);
+        console.log("Country: ", rd[i].venue.country);
+        console.log("Date: ", moment(rd[i].datetime, "YYYY-MM-DD").format("MM/DD/YYYY"));
         console.log("==============================\n");
       }
     })
@@ -64,13 +64,13 @@ function getSpotify(params) {
     })
     .then(function (response) {
 
-      var songData = response.tracks.items;
-      for (let i = 0; i < songData.length; i++) {
+      let sd = response.tracks.items;
+      for (let i = 0; i < sd.length; i++) {
         console.log("\n==============================");
-        console.log("Artist(s): " + songData[i].artists[0].name);
-        console.log("Song Name: " + songData[i].name);
-        console.log("Preview Link: " + songData[i].preview_url);
-        console.log("Album: " + songData[i].album.name);
+        console.log("Artist(s): " + sd[i].artists[0].name);
+        console.log("Song Name: " + sd[i].name);
+        console.log("Preview Link: " + sd[i].preview_url);
+        console.log("Album: " + sd[i].album.name);
         console.log("==============================\n");
       }
     })
@@ -86,19 +86,20 @@ function getMovie(params) {
 
   axios.get(queryURL)
     .then(function (response) {
+      let rd = response.data;
       console.log("\n==============================");
-      console.log("Title: ", response.data.Title);
-      console.log("Year: ", response.data.Year);
-      console.log("Rated: ", response.data.Rated);
-      console.log("IMDB Rating: ", response.data.imdbRating);
-      console.log("Country: ", response.data.Country);
-      console.log("Language: ", response.data.Language);
-      console.log("Plot: ", response.data.Plot);
-      console.log("Actors: ", response.data.Actors);
+      console.log("Title: ", rd.Title);
+      console.log("Year: ", rd.Year);
+      console.log("Rated: ", rd.Rated);
+      console.log("IMDB Rating: ", rd.imdbRating);
+      console.log("Country: ", rd.Country);
+      console.log("Language: ", rd.Language);
+      console.log("Plot: ", rd.Plot);
+      console.log("Actors: ", rd.Actors);
       console.log("==============================\n");
 
-      if (response.data.Ratings[1]) {
-        console.log("Rotten tomatoes rating: ", response.data.Ratings[1].Value);
+      if (rd.Ratings[1]) {
+        console.log("Rotten tomatoes rating: ", rd.Ratings[1].Value);
         console.log("==============================\n");
       }
     })
