@@ -6,7 +6,14 @@ const moment = require("moment");
 const fs = require("fs");
 const spotify = new Spotify(keys.spotify);
 
-App(process.argv[2], process.argv[3]);
+var command = process.argv[2];
+var params = process.argv[3];
+
+for (var i = 4; i < process.argv.length; i++) {
+  params += " " + process.argv[i];
+}
+
+App(command, params);
 
 function App(command, params) {
 
@@ -30,7 +37,6 @@ function App(command, params) {
   }
 };
 
-
 function getConcert(params) {
   if (params === undefined || params === " ") {
     params = "Rancid";
@@ -42,7 +48,7 @@ function getConcert(params) {
     .then(function (response) {
       let rd = response.data;
       for (let i = 0; i < rd.length; i++) {
-        console.log("\n==============================");
+        console.log("\n===== "  + params +  " =====");
         console.log("Name: ", rd[i].venue.name);
         console.log("City: ", rd[i].venue.city);
         console.log("Country: ", rd[i].venue.country);
@@ -80,7 +86,6 @@ function getSpotify(params) {
     .catch(function (err) {
       console.log(err);
     });
-
 };
 
 function getMovie(params) {
