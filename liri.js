@@ -32,6 +32,9 @@ function App(command, params) {
 
 
 function getConcert(params) {
+  if (params === undefined || params === " ") {
+    params = "Rancid";
+  }
 
   let queryURL = "https://rest.bandsintown.com/artists/" + params + "/events?app_id=codingbootcamp"
 
@@ -54,7 +57,7 @@ function getConcert(params) {
 
 function getSpotify(params) {
   if (params === undefined || params === " ") {
-    params = "Welcome to The Jungle";
+    params = "Fake Plastic Trees";
   }
 
   spotify
@@ -81,6 +84,9 @@ function getSpotify(params) {
 };
 
 function getMovie(params) {
+  if (params === undefined || params === " ") {
+    params = "Sideways";
+  }
 
   let queryURL = "http://www.omdbapi.com/?t=" + params + "&y=&plot=short&apikey=trilogy";
 
