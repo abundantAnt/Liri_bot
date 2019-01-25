@@ -61,7 +61,13 @@ function getSpotify(params) {
   spotify
     .search({ type: 'track', query: params })
     .then(function(response) {
-      console.log(response.tracks.items);
+
+      var songData = response.tracks.items;
+      console.log("Artist(s): " + songData[0].artists[0].name);
+	    console.log("Song Name: " + songData[0].name);
+	    console.log("Preview Link: " + songData[0].preview_url);
+      console.log("Album: " + songData[0].album.name);
+      console.log("===========================");
     })
     .catch(function(err) {
       console.log(err);
