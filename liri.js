@@ -39,14 +39,13 @@ function getConcert(params) {
     .then(function (response) {
       data = response.data;
       for (let i = 0; i < data.length; i++) {
-
-        console.log("Name: ",data[i].venue.name);
-        console.log("City: ",data[i].venue.city);
-        console.log("Country: ",data[i].venue.country);
-        console.log("Date: ",moment(data[i].datetime, "YYYY-MM-DD").format("MM/DD/YYYY"));
-        console.log("====================================")
+        console.log("\n==============================");
+        console.log("Name: ", data[i].venue.name);
+        console.log("City: ", data[i].venue.city);
+        console.log("Country: ", data[i].venue.country);
+        console.log("Date: ", moment(data[i].datetime, "YYYY-MM-DD").format("MM/DD/YYYY"));
+        console.log("==============================\n");
       }
-
     })
     .catch(function (err) {
       console.log(err);
@@ -56,20 +55,26 @@ function getConcert(params) {
 function getSpotify(params) {
   if (params === undefined || params === " ") {
     params = "Welcome to The Jungle";
-  } 
+  }
 
   spotify
-    .search({ type: 'track', query: params })
-    .then(function(response) {
+    .search({
+      type: 'track',
+      query: params
+    })
+    .then(function (response) {
 
       var songData = response.tracks.items;
-      console.log("Artist(s): " + songData[0].artists[0].name);
-	    console.log("Song Name: " + songData[0].name);
-	    console.log("Preview Link: " + songData[0].preview_url);
-      console.log("Album: " + songData[0].album.name);
-      console.log("===========================");
+      for (let i = 0; i < songData.length; i++) {
+        console.log("\n==============================");
+        console.log("Artist(s): " + songData[i].artists[0].name);
+        console.log("Song Name: " + songData[i].name);
+        console.log("Preview Link: " + songData[i].preview_url);
+        console.log("Album: " + songData[i].album.name);
+        console.log("==============================\n");
+      }
     })
-    .catch(function(err) {
+    .catch(function (err) {
       console.log(err);
     });
 
@@ -81,6 +86,7 @@ function getMovie(params) {
 
   axios.get(queryURL)
     .then(function (response) {
+      console.log("\n==============================");
       console.log("Title: ", response.data.Title);
       console.log("Year: ", response.data.Year);
       console.log("Rated: ", response.data.Rated);
@@ -89,10 +95,11 @@ function getMovie(params) {
       console.log("Language: ", response.data.Language);
       console.log("Plot: ", response.data.Plot);
       console.log("Actors: ", response.data.Actors);
+      console.log("==============================\n");
 
       if (response.data.Ratings[1]) {
         console.log("Rotten tomatoes rating: ", response.data.Ratings[1].Value);
-        console.log("================");
+        console.log("==============================\n");
       }
     })
     .catch(function (err) {
