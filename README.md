@@ -1,8 +1,6 @@
-# Liri_bot
+# LIRI BOT
 
 [Liri Bot Demo Click Here!!!](https://drive.google.com/file/d/1xWV64COWScfcT2RUfOUVuq0j6Gld4ACW/view?usp=sharing)
-
-# LIRI Bot
 
 ### Overview
 
